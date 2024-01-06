@@ -1,0 +1,49 @@
+openapi: 3.0.3
+info:
+  title: Hello World API
+  version: 1.0.0
+
+components:
+  schemas:
+    Greeting:
+      type: object
+      properties:
+        message:
+          type: string
+
+    Greetings:
+      type: object
+      properties:
+        greetings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Greeting'
+
+paths:
+  /greetings/hello:
+    get:
+      summary: Get Hello World
+      description: Returns a greeting message.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Greeting'
+      tags:
+        - Greetings
+
+  /greetings/all:
+    get:
+      summary: Get all messages
+      description: Returns a list of messages.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Greetings'
+      tags:
+        - Greetings

@@ -1,0 +1,29 @@
+plugins {
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '19'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc:3.1.5'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.h2database:h2:2.2.220'
+    implementation 'org.testng:testng:7.7.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    runtimeOnly 'org.postgresql:postgresql'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

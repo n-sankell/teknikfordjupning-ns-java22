@@ -21,10 +21,9 @@ public class GreetingRepository {
             SELECT greeting_id, greeting_value FROM greeting
             """;
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
-            Greeting entity = new Greeting();
-            entity.setGreeting_id(UUID.fromString(rs.getString("greeting_id")));
-            entity.setGreeting_vale(rs.getString("greeting_value"));
-            return entity;
+            var id = UUID.fromString(rs.getString("greeting_id"));
+            var value = rs.getString("greeting_value");
+            return new Greeting(id, value);
         });
     }
 

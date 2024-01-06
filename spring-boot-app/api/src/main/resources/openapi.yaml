@@ -25,6 +25,7 @@ paths:
     get:
       summary: Get all messages
       description: Returns a list of messages.
+      operationId: getGreetings
       responses:
         '200':
           description: OK

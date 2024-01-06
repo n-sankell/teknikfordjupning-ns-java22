@@ -10,7 +10,7 @@ public class GreetingConverter {
 
     public static GreetingDto convert(Greeting greeting) {
         return new GreetingDto()
-            .message(greeting.getGreeting_vale());
+            .message(greeting.greetingValue());
     }
 
     public static GreetingsDto convert(List<Greeting> greetings) {

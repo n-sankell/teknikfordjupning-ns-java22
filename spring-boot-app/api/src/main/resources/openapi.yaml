@@ -20,19 +20,6 @@ components:
             $ref: '#/components/schemas/Greeting'
 
 paths:
-  /greetings/hello:
-    get:
-      summary: Get Hello World
-      description: Returns a greeting message.
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Greeting'
-      tags:
-        - Greetings
 
   /greetings/all:
     get:

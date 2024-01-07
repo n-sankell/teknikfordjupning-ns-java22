@@ -5,6 +5,7 @@ import generatedapi.model.GreetingsDto;
 import hello.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.example.converter.GreetingConverter.convert;
@@ -20,6 +21,7 @@ public class HelloApiController implements GreetingsApi {
     }
 
     @Override
+    @CrossOrigin("http://localhost:3000/")
     public ResponseEntity<GreetingsDto> greetingsAllGet() {
         return ResponseEntity.ok().body(convert(helloService.getGreetings()));
     }

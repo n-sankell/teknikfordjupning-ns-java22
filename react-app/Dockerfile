@@ -1,6 +1,8 @@
 # Use an official Node.js image as the base image
 FROM node:20-alpine
 
+RUN npm install -g yarn
+
 # Set the working directory inside the container
 WORKDIR /app
 

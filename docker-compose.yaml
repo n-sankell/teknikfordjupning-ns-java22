@@ -27,7 +27,6 @@ services:
       
   copy-api-spec:
     build:
-      context: ./openapi-generator
       dockerfile: Dockerfile
-    volumes:
-      - .
+    command: "sleep infinity"
+

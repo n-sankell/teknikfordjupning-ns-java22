@@ -17,6 +17,10 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
 }
 
+springBoot {
+    mainClass = 'org.example.ApiApplication'
+}
+
 repositories {
     mavenCentral()
 }

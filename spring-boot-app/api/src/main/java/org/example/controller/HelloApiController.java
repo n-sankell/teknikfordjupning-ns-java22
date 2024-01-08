@@ -22,7 +22,7 @@ public class HelloApiController implements GreetingsApi {
 
     @Override
     @CrossOrigin(value = {"http://localhost:3000/", "http://localhost:3001/"})
-    public ResponseEntity<GreetingsDto> greetingsAllGet() {
+    public ResponseEntity<GreetingsDto> getGreetings() {
         return ResponseEntity.ok().body(convert(helloService.getGreetings()));
     }
 

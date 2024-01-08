@@ -1,4 +1,4 @@
-CREATE TABLE greeting IF NOT EXISTS (
+CREATE TABLE IF NOT EXISTS greeting (
     greeting_id UUID NOT NULL PRIMARY KEY,
     greeting_value character varying(255) NOT NULL
 );

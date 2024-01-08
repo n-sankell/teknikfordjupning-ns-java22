@@ -1,31 +1,37 @@
-# Use an official Node.js image as the base image
-FROM node:20-alpine
+FROM openapitools/openapi-generator:cli-v4.3.0
 
-RUN npm install -g yarn
+COPY openapi.yaml /opt/openapi-generator/modules/openapi-generator-cli/target
 
-# Set the working directory inside the container
-WORKDIR /app
+RUN [ -d "/src/generated" ] && rm -rf /src/generated || true
 
-# Copy package.json and package-lock.json (or yarn.lock) to the working directory
-COPY package.json yarn.lock /app/
+WORKDIR '/opt/openapi-generator/modules/openapi-generator-cli/target'
 
-# Install dependencies
-RUN yarn install
+RUN java -jar openapi-generator-cli.jar generate -i openapi.yaml -g typescript-fetch -o ./src/generated --additional-properties redux=true
 
-# Copy the entire project to the working directory
-COPY . /app/
+FROM node:20-slim
 
-# Generate sources with OpenAPI
-RUN yarn openapi-generator-cli generate -i ../spring-boot-app/api/src/main/resources/openapi.yaml -g typescript-fetch -o ./src/generated --additional-properties redux=true
+WORKDIR '/app'
 
-# Build the React app
+ARG REACT_APP_SENTRY_DNS
+
+ARG REACT_APP_API_HOST
+
+ENV API_BASE_URL='http://localhost:8080'
+
+COPY package.json .
+
+RUN yarn
+
+COPY . .
+
 RUN yarn build
 
-# Expose the port the app runs on
-# EXPOSE 3000
+RUN mv build/ ../ 
 
-# Set the environment variable for the base URL
-ENV API_BASE_URL="http://localhost:8080"
+RUN rm -r ./*
 
-# Start the React app
-CMD ["yarn", "start"]
+RUN mv ../build ./
+
+RUN npm install -g serve
+
+CMD serve -s build -l 3001

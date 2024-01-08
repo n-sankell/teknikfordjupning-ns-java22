@@ -1,29 +1,29 @@
-package org.example.controller;
+package com.example.springbootapp.controller;
 
+import com.example.springbootapp.service.GreetingsService;
 import generatedapi.GreetingsApi;
 import generatedapi.model.GreetingsDto;
-import hello.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.example.converter.GreetingConverter.convert;
+import static com.example.springbootapp.converter.GreetingConverter.convert;
 
 @RestController
-public class HelloApiController implements GreetingsApi {
+public class GreetingsApiController implements GreetingsApi {
 
-    private final HelloService helloService;
+    private final GreetingsService greetingsService;
 
     @Autowired
-    public HelloApiController(HelloService helloService) {
-        this.helloService = helloService;
+    public GreetingsApiController(GreetingsService greetingsService) {
+        this.greetingsService = greetingsService;
     }
 
     @Override
     @CrossOrigin(value = {"http://localhost:3000/", "http://localhost:3001/"})
     public ResponseEntity<GreetingsDto> getGreetings() {
-        return ResponseEntity.ok().body(convert(helloService.getGreetings()));
+        return ResponseEntity.ok(convert(greetingsService.getGreetings()));
     }
 
 }

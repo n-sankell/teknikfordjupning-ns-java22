@@ -1,8 +1,8 @@
-package org.example.converter;
+package com.example.springbootapp.converter;
 
+import com.example.springbootapp.model.Greeting;
 import generatedapi.model.GreetingDto;
 import generatedapi.model.GreetingsDto;
-import hello.model.Greeting;
 
 import java.util.List;
 

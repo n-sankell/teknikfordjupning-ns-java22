@@ -1,7 +1,5 @@
-package org.example.configuration;
+package com.example.springbootapp.config;
 
-import hello.HelloService;
-import hello.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -34,16 +32,6 @@ public class Configuration {
     @Bean
     NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
         return new NamedParameterJdbcTemplate(dataSource());
-    }
-
-    @Bean
-    GreetingRepository greetingRepository() {
-        return new GreetingRepository(namedParameterJdbcTemplate());
-    }
-
-    @Bean
-    HelloService helloService() {
-        return new HelloService(greetingRepository());
     }
 
 }

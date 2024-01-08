@@ -1,6 +1,6 @@
-package hello.repository;
+package com.example.springbootapp.repository;
 
-import hello.model.Greeting;
+import com.example.springbootapp.model.Greeting;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.List;

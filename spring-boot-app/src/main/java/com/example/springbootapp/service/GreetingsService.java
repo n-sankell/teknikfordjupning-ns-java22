@@ -1,19 +1,19 @@
-package hello;
+package com.example.springbootapp.service;
 
-import hello.model.Greeting;
-import hello.repository.GreetingRepository;
+import com.example.springbootapp.model.Greeting;
+import com.example.springbootapp.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class HelloService {
+public class GreetingsService {
 
     private final GreetingRepository greetingRepository;
 
     @Autowired
-    public HelloService(
+    public GreetingsService(
         GreetingRepository greetingRepository
     ) {
         this.greetingRepository = greetingRepository;

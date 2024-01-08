@@ -1,4 +1,4 @@
-package hello.model;
+package com.example.springbootapp.model;
 
 import java.util.UUID;
 

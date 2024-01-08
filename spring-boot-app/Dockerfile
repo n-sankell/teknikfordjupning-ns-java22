@@ -1,32 +1,26 @@
 FROM eclipse-temurin:19 AS build-stage
 
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the Gradle wrapper and build files
-COPY gradlew .
-COPY gradle gradle
-COPY build.gradle .
-COPY settings.gradle .
-
-# Copy API module files
-COPY api/build.gradle api/
-COPY api/src api/src
-
-# Copy Service module files
-COPY service/build.gradle service/
-COPY service/src service/src
+WORKDIR /build
 
 RUN ./gradlew clean
-RUN ./gradlew -p api cleanGeneratedFiles
-RUN ./gradlew -p api openApiGenerate
 
-# Run the Gradle build
-RUN ./gradlew build -x test
+COPY ./gradle/ ./gradle/
+COPY ./gradlew .
+COPY ./settings.gradle .
+RUN ./gradlew --version --no-daemon
+
+COPY ./build.gradle .
+RUN ./gradlew dependencies --no-daemon
+
+COPY ./src/ ./src/
+
+RUN ./gradlew openApiGenerate
+RUN ./gradlew build --no-daemon -x test
+RUN rm /build/build/libs/*-plain.jar
 
 FROM eclipse-temurin:19-jre-alpine
 WORKDIR /app
-COPY --from=build-stage /app/build/libs/*.jar /app/api.jar
+COPY --from=build-stage /build/build/libs/*.jar /app/api.jar
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser

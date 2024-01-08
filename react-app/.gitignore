@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /src/generated
+openapi.yaml
 
 # testing
 /coverage

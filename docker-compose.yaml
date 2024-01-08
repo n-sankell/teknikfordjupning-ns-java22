@@ -1,0 +1,33 @@
+version: '3'
+services:
+  database:
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+
+  frontend:
+    build:
+      context: ./react-app
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    depends_on:
+      - copy-api-spec
+  
+  backend:
+    build:
+      context: ./spring-boot-app
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+      
+  copy-api-spec:
+    build:
+      context: ./openapi-generator
+      dockerfile: Dockerfile
+    volumes:
+      - .

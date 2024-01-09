@@ -6,7 +6,7 @@ services:
     build:
       context: ./postgres
       dockerfile: Dockerfile
-      image: tf-postgres
+    image: tf-postgres
     ports:
       - "127.0.0.1:5432:5432"
 
@@ -15,7 +15,7 @@ services:
     build:
       context: ./react-app
       dockerfile: Dockerfile
-      image: tf-react-app
+    image: tf-react-app
     ports:
       - "3000:3000"
     depends_on:
@@ -25,7 +25,7 @@ services:
     container_name: spring-boot-app
     build:
       dockerfile: Dockerfile
-      image: tf-spring-boot-app
+    image: tf-spring-boot-app
     ports:
       - "8080:8080"
     environment:

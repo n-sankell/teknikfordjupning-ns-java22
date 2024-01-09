@@ -16,12 +16,11 @@ services:
     ports:
       - "3001:3001"
     depends_on:
-      - copy-api-spec
+      - spring-boot-app
   
   spring-boot-app:
     container_name: spring-boot-app
     build:
-      context: ./spring-boot-app
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
@@ -29,9 +28,3 @@ services:
       PG_IMAGE: "greetings_pgdb"
     depends_on:
       - greetings_pgdb
-      
-  copy-api-spec:
-    build:
-      dockerfile: Dockerfile
-    command: "sleep infinity"
-

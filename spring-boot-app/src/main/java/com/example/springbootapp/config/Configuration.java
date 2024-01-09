@@ -11,6 +11,8 @@ import javax.sql.DataSource;
 @org.springframework.context.annotation.Configuration
 public class Configuration {
 
+    @Value("${PG_IMAGE:localhost}")
+    private String pgImage;
     @Value("${POSTGRES_DB:greeting_db}")
     private String postgresDB;
     @Value("${POSTGRES_USER:user}")
@@ -23,7 +25,7 @@ public class Configuration {
     DataSource dataSource() {
         DataSourceBuilder<?> builder = DataSourceBuilder.create();
         builder.driverClassName("org.postgresql.Driver");
-        builder.url("jdbc:postgresql://localhost:5432/"+postgresDB);
+        builder.url("jdbc:postgresql://"+pgImage+":5432/"+postgresDB);
         builder.username(postgresUser);
         builder.password(postgresPass);
         return builder.build();

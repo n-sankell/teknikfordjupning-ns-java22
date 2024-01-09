@@ -2,11 +2,10 @@ FROM eclipse-temurin:19 AS build-stage
 
 WORKDIR /build
 
-RUN ./gradlew clean
-
 COPY ./gradle/ ./gradle/
 COPY ./gradlew .
 COPY ./settings.gradle .
+
 RUN ./gradlew --version --no-daemon
 
 COPY ./build.gradle .
@@ -14,6 +13,7 @@ RUN ./gradlew dependencies --no-daemon
 
 COPY ./src/ ./src/
 
+RUN ./gradlew clean
 RUN ./gradlew openApiGenerate
 RUN ./gradlew build --no-daemon -x test
 RUN rm /build/build/libs/*-plain.jar

@@ -1,13 +1,15 @@
 version: '3'
 services:
-  database:
+  greetings_pgdb:
+    container_name: greetings_pgdb
     build:
       context: ./postgres
       dockerfile: Dockerfile
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
 
-  frontend:
+  react-app:
+    container_name: react-app
     build:
       context: ./react-app
       dockerfile: Dockerfile
@@ -16,14 +18,17 @@ services:
     depends_on:
       - copy-api-spec
   
-  backend:
+  spring-boot-app:
+    container_name: spring-boot-app
     build:
       context: ./spring-boot-app
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    environment:
+      PG_IMAGE: "greetings_pgdb"
     depends_on:
-      - database
+      - greetings_pgdb
       
   copy-api-spec:
     build:

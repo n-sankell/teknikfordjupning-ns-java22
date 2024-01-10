@@ -16,20 +16,23 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: tf-postgres
+        image: xtf-postgres
+        imagePullPolicy: Never
         ports:
         - containerPort: 5432
         env:
-        - name: ENV POSTGRES_USER
+        - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
               name: postgres-secret
               key: postgres-user
-        - name: ENV POSTGRES_PASSWORD
+        - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
               name: postgres-secret
               key: postgres-password
+        - name: POSTGRES_DB
+          value: postgres
 ---
 apiVersion: v1
 kind: Service

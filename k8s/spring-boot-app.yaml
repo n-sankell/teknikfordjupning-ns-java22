@@ -12,11 +12,12 @@ spec:
   template:
     metadata:
       labels:
-        app: react-app
+        app: spring-boot-app
     spec:
       containers:
       - name: spring-boot-app
-        image: tf-spring-boot-app
+        image: xtf-spring-boot-app
+        imagePullPolicy: Never
         ports:
         - containerPort: 8080
         env:
@@ -30,9 +31,9 @@ spec:
             secretKeyRef:
               name: postgres-secret
               key: postgres-password
-        - name: POSTGRES_DB
+        - name: POSTGRES_URL
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               name: postgres-config
               key: postgres-url
 ---

@@ -1,34 +1,37 @@
-FROM eclipse-temurin:19 AS build-stage
+FROM openapitools/openapi-generator:cli-v4.3.0 AS openapi-generator
 
 COPY /spring-boot-app/src/main/resources/openapi.yaml /react-app
 
-WORKDIR /build
+COPY react-app/openapi.yaml /opt/openapi-generator/modules/openapi-generator-cli/target
 
-COPY ./spring-boot-app/gradle/ ./gradle/
-COPY ./spring-boot-app/gradlew .
-COPY ./spring-boot-app/settings.gradle .
+RUN [ -d "/src/generated" ] && rm -rf /src/generated || true
 
-RUN ./gradlew --version --no-daemon
+WORKDIR '/opt/openapi-generator/modules/openapi-generator-cli/target'
 
-COPY ./spring-boot-app/build.gradle .
-RUN ./gradlew dependencies --no-daemon
+RUN java -jar openapi-generator-cli.jar generate -i openapi.yaml -g typescript-fetch -o .react-app/src/generated --additional-properties redux=true
 
-COPY ./spring-boot-app/src/ ./src/
+FROM node:20-slim AS builder
 
-RUN ./gradlew clean
-RUN ./gradlew openApiGenerate
-RUN ./gradlew build --no-daemon -x test
-RUN rm /build/build/libs/*-plain.jar
+WORKDIR '/app'
 
-FROM eclipse-temurin:19-jre-alpine
-WORKDIR /app
-COPY --from=build-stage /build/build/libs/*.jar /app/api.jar
+ARG REACT_APP_SENTRY_DNS
+ARG REACT_APP_API_HOST
+ENV API_BASE_URL='http://localhost:8080'
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-USER appuser
+COPY react-app/package.json .
 
-# Expose the port if your Spring Boot app uses a specific port
-EXPOSE 8080
+RUN yarn
 
-# Command to run the Spring Boot application
-ENTRYPOINT ["java", "-jar", "api.jar", "-Djava.net.preferIPv4Stack=true"]
+COPY react-app/ ./
+
+RUN yarn build
+
+FROM node:20-slim
+
+WORKDIR '/app'
+
+COPY --from=builder /app/build ./build
+
+RUN npm install -g serve
+
+CMD serve -s build -l 3000

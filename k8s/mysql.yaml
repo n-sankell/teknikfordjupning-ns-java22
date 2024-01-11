@@ -43,7 +43,7 @@ metadata:
     app: mysql
 spec:
   ports:
-    - port: 3307
+    - port: 3306
   selector:
     app: mysql
     tier: mysql
@@ -75,7 +75,7 @@ spec:
         name: mysql
         imagePullPolicy: Never
         ports:
-        - containerPort: 3307
+        - containerPort: 3306
           name: mysql
         volumeMounts:
         - name: mysql-persistent-storage

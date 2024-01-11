@@ -25,8 +25,6 @@ COPY --from=build-stage /build/build/libs/*.jar /app/api.jar
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
 
-# Expose the port if your Spring Boot app uses a specific port
 EXPOSE 8080
 
-# Command to run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "api.jar", "-Djava.net.preferIPv4Stack=true"]

@@ -13,8 +13,6 @@ services:
     build:
       dockerfile: Dockerfile
     image: tf-react-app:k8s
-    environment:
-      REACT_APP_API_BASE_URL: "http://192.168.49.2:32000"
 
   spring-boot-app:
     container_name: spring-boot-app

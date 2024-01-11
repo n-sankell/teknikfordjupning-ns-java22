@@ -6,8 +6,7 @@ services:
     build:
       context: ./mysql
       dockerfile: Dockerfile
-    image: xtf-mysql:k8s
-
+    image: tf-mysql:k8s
   react-app:
     container_name: react-app
     build:

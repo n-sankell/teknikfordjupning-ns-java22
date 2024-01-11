@@ -5,6 +5,8 @@ docker context use default
 
 minikube start --ports=32000:32000
 
+minikube addons enable ingress
+
 echo "-----"
 
 ./apply-manifests.sh

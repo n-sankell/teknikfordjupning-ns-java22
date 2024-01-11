@@ -12,7 +12,7 @@ services:
     container_name: react-app
     build:
       dockerfile: Dockerfile
-    image: tf-react-app:k8s
+    image: tf-react-app:k8sV1.0.0
 
   spring-boot-app:
     container_name: spring-boot-app

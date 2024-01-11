@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "minikube image load tf-postgres:k8s"
+echo "minikube image load tf-mysql:k8s"
 minikube image load tf-postgres:k8s
 echo "DONE"
 echo "minikube image load tf-react-app:k8s"

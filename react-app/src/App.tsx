@@ -4,7 +4,7 @@ import Content from './app/components/Content';
 import './App.css';
 
 const newConfiguration: ConfigurationParameters = {
-  basePath: process.env.API_BASE_URL || "http://192.168.49.2t:32000",
+  basePath: process.env.API_BASE_URL || "http://192.168.49.2:32000",
 };
 DefaultConfig.config = new Configuration(newConfiguration);
 const greetingsApi = new GreetingsApi();

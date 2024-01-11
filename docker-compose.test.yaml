@@ -1,0 +1,34 @@
+version: '3'
+services:
+
+  mysql:
+    container_name: mysql-test
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    image: tf-mysql:test
+    ports:
+      - "127.0.0.1:5432:5432"
+
+  react-app:
+    container_name: react-app-test
+    build:
+      dockerfile: Dockerfile
+    image: tf-react-app:test
+    ports:
+      - "3000:3000"
+    env:
+      API_BASE_URL: "http://localhost:8080"
+
+  spring-boot-app:
+    container_name: spring-boot-app-test
+    build:
+      dockerfile: Dockerfile
+      context: ./spring-boot-app
+    image: tf-spring-boot-app:test
+    ports:
+      - "8080:8080"
+    env:
+      MYSQL_URL: "mysql"
+    depends_on:
+      - mysql

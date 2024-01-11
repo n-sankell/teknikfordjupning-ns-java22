@@ -1,0 +1,22 @@
+version: '3'
+services:
+
+  postgres:
+    container_name: mysql
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    image: xtf-mysql:k8s
+
+  react-app:
+    container_name: react-app
+    build:
+      dockerfile: Dockerfile
+    image: tf-react-app:k8s
+
+  spring-boot-app:
+    container_name: spring-boot-app
+    build:
+      dockerfile: Dockerfile
+      context: ./spring-boot-app
+    image: tf-spring-boot-app:k8s

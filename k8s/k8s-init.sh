@@ -14,3 +14,5 @@ echo "-----"
 echo "-----"
 
 ./load-images.sh
+
+minikube tunnel

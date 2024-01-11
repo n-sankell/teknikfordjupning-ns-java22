@@ -16,27 +16,32 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: xtf-spring-boot-app
+        image: xtf-spring-boot-app:mysql
         imagePullPolicy: Never
         ports:
         - containerPort: 8080
+        
         env:
-        - name: POSTGRES_USER
+        - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
-              key: postgres-user
-        - name: POSTGRES_PASSWORD
+              name: mysql-secret
+              key: mysql-user
+              
+        - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
-              key: postgres-password
-        - name: POSTGRES_URL
+              name: mysql-secret
+              key: mysql-password
+              
+        - name: MYSQL_URL
           valueFrom:
             configMapKeyRef:
-              name: postgres-config
-              key: postgres-url
+              name: mysql-config
+              key: mysql-url
+              
 ---
+
 apiVersion: v1
 kind: Service
 metadata:

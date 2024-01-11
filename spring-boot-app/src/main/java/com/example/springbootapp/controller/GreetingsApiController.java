@@ -21,7 +21,7 @@ public class GreetingsApiController implements GreetingsApi {
     }
 
     @Override
-    @CrossOrigin(value = {"http://localhost:3000/", "http://localhost:32000/"})
+    @CrossOrigin()
     public ResponseEntity<GreetingsDto> getGreetings() {
         return ResponseEntity.ok(convert(greetingsService.getGreetings()));
     }

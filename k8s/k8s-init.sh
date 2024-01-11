@@ -3,7 +3,8 @@ chmod +x ./load-images.sh
 
 docker context use default
 
-minikube start --ports=32000:32000
+# minikube start --ports=32000:32000
+minikube start
 
 minikube addons enable ingress
 
@@ -15,4 +16,4 @@ echo "-----"
 
 ./load-images.sh
 
-minikube tunnel
+#minikube tunnel

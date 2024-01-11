@@ -4,7 +4,7 @@ COPY /spring-boot-app/src/main/resources/openapi.yaml /react-app
 
 COPY react-app/openapi.yaml /opt/openapi-generator/modules/openapi-generator-cli/target
 
-RUN [ -d "/src/generated" ] && rm -rf /src/generated || true
+RUN [ -d "react-app/src/generated" ] && rm -rf react-app/src/generated || true
 
 WORKDIR '/opt/openapi-generator/modules/openapi-generator-cli/target'
 

@@ -18,5 +18,5 @@ WHERE NOT EXISTS (
     SELECT greeting_id FROM greeting WHERE greeting_id = '660e9511-e29b-51d5-a716-546655440001'
 );
 
-GRANT ALL PRIVILEGES ON mysql.* TO 'user'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON mysql.* TO 'user'@'%';
 FLUSH PRIVILEGES;

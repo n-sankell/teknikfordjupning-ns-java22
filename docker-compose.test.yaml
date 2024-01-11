@@ -2,7 +2,7 @@ version: '3'
 services:
 
   mysql:
-    container_name: mysql-test
+    container_name: mysql
     build:
       context: ./mysql
       dockerfile: Dockerfile
@@ -11,7 +11,7 @@ services:
       - "127.0.0.1:5432:5432"
 
   react-app:
-    container_name: react-app-test
+    container_name: react-app
     build:
       dockerfile: Dockerfile
     image: tf-react-app:test
@@ -21,7 +21,7 @@ services:
       API_BASE_URL: "http://localhost:8080"
 
   spring-boot-app:
-    container_name: spring-boot-app-test
+    container_name: spring-boot-app
     build:
       dockerfile: Dockerfile
       context: ./spring-boot-app

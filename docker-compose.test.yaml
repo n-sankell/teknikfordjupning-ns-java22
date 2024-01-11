@@ -17,8 +17,6 @@ services:
     image: tf-react-app:test
     ports:
       - "3000:3000"
-    environment:
-      REACT_APP_API_BASE_URL: "http://localhost:8080"
 
   spring-boot-app:
     container_name: spring-boot-app

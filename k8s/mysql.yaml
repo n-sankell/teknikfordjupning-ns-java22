@@ -1,18 +1,18 @@
 apiVersion: v1
-kind: PersistentVolume            # Create a PersistentVolume
+kind: PersistentVolume
 metadata:
   name: mysql-pv
   labels:
     type: local
 spec:
-  storageClassName: standard      # Storage class. A PV Claim requesting the same storageClass can be bound to this volume. 
+  storageClassName: standard
   capacity:
     storage: 500Mi
   accessModes:
     - ReadWriteOnce
-  hostPath:                       # hostPath PersistentVolume is used for development and testing. It uses a file/directory on the Node to emulate network-attached storage
+  hostPath:
     path: "/mnt/data"
-  persistentVolumeReclaimPolicy: Retain  # Retain the PersistentVolume even after PersistentVolumeClaim is deleted. The volume is considered “released”. But it is not yet available for another claim because the previous claimant’s data remains on the volume. 
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     name: mysql-pv-claim
     namespace: default
@@ -20,31 +20,31 @@ spec:
 ---    
 
 apiVersion: v1
-kind: PersistentVolumeClaim        # Create a PersistentVolumeClaim to request a PersistentVolume storage
-metadata:                          # Claim name and labels
+kind: PersistentVolumeClaim
+metadata:
   name: mysql-pv-claim
   labels:
     app: app
-spec:                              # Access mode and resource limits
-  storageClassName: standard       # Request a certain storage class
+spec:
+  storageClassName: standard
   accessModes:
-    - ReadWriteOnce                # ReadWriteOnce means the volume can be mounted as read-write by a single Node
+    - ReadWriteOnce
   resources:
     requests:
       storage: 500Mi
 
 ---
 
-apiVersion: v1                    # API version
-kind: Service                     # Type of kubernetes resource 
+apiVersion: v1
+kind: Service
 metadata:
-  name: mysql-service       # Name of the resource
-  labels:                         # Labels that will be applied to the resource
+  name: mysql-service
+  labels:
     app: mysql
 spec:
   ports:
     - port: 3306
-  selector:                       # Selects any Pod with labels `app=polling-app,tier=mysql`
+  selector:
     app: mysql
     tier: mysql
   clusterIP: None
@@ -52,54 +52,35 @@ spec:
 ---
 
 apiVersion: apps/v1
-kind: Deployment                    # Type of the kubernetes resource
+kind: Deployment
 metadata:
-  name: mysql-deployment           # Name of the deployment
-  labels:                           # Labels applied to this deployment 
+  name: mysql-deployment
+  labels:
     app: mysql
 spec:
   selector:
-    matchLabels:                    # This deployment applies to the Pods matching the specified labels
+    matchLabels:
       app: mysql
       tier: mysql
   strategy:
     type: Recreate
-  template:                         # Template for the Pods in this deployment
+  template:
     metadata:
-      labels:                       # Labels to be applied to the Pods in this deployment
+      labels:
         app: mysql
         tier: mysql
-    spec:                           # The spec for the containers that will be run inside the Pods in this deployment
+    spec:
       containers:
-      - image: mysql:5.6            # The container image
+      - image: xtf-mysql:k8s
         name: mysql
-        
-        env:                        # Environment variables passed to the container 
-        - name: MYSQL_ROOT_PASSWORD 
-          valueFrom:                # Read environment variables from kubernetes secrets
-            secretKeyRef:
-              name: mysql-secret
-              key: mysql-root-pass
-              
-        - name: MYSQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: mysql-user
-              
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: mysql-password
-              
+        imagePullPolicy: Never
         ports:
-        - containerPort: 3306        # The port that the container exposes       
+        - containerPort: 3306
           name: mysql
         volumeMounts:
-        - name: mysql-persistent-storage  # This name should match the name specified in `volumes.name`
+        - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
-      volumes:                       # A PersistentVolume is mounted as a volume to the Pod  
+      volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-pv-claim

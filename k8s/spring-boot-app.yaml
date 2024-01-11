@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: xtf-spring-boot-app:mysql
+        image: xtf-spring-boot-app:k8s
         imagePullPolicy: Never
         ports:
         - containerPort: 8080

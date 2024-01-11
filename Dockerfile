@@ -14,10 +14,6 @@ FROM node:20-slim AS builder
 
 WORKDIR '/app'
 
-ARG REACT_APP_SENTRY_DNS
-ARG REACT_APP_API_HOST
-ENV API_BASE_URL='http://192.168.49.2t:32000'
-
 COPY react-app/package.json .
 
 RUN yarn

@@ -17,7 +17,7 @@ function App() {
       const greetings = await greetingsApi.getGreetings();
       setContent(<Content greetings={greetings} />)
     } catch (error) {
-      console.error('Error fetching greetings:', error);
+      console.error('Error fetching greetings');
     }
   };
   

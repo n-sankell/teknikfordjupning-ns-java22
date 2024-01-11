@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     image: tf-mysql:test
     ports:
-      - "127.0.0.1:3307:3307"
+      - "127.0.0.1:3306:3306"
 
   react-app:
     container_name: react-app

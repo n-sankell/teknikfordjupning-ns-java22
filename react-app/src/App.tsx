@@ -4,7 +4,7 @@ import Content from './app/components/Content';
 import './App.css';
 
 const newConfiguration: ConfigurationParameters = {
-  basePath: "http://192.168.49.2:32000"
+  basePath: "spring-boot-app-service"
 };
 DefaultConfig.config = new Configuration(newConfiguration);
 const greetingsApi = new GreetingsApi();

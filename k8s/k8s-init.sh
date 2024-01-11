@@ -5,5 +5,10 @@ docker context use default
 
 minikube start --ports=32000:32000
 
+echo "-----"
+
 ./apply-manifests.sh
+
+echo "-----"
+
 ./load-images.sh

@@ -71,7 +71,7 @@ spec:
         tier: mysql
     spec:
       containers:
-      - image: xtf-mysql:k8s
+      - image: tf-mysql:k8s
         name: mysql
         imagePullPolicy: Never
         ports:

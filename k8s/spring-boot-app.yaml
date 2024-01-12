@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: tf-spring-boot-app:k8sV1.0
+        image: tf-spring-boot-app:k8sV1.1
         imagePullPolicy: Never
         ports:
         - containerPort: 8080
@@ -47,6 +47,7 @@ kind: Service
 metadata:
   name: spring-boot-app-service
 spec:
+  type: NodePort
   selector:
     app: spring-boot-app
   ports:

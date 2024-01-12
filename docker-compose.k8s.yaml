@@ -19,7 +19,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./spring-boot-app
-    image: tf-spring-boot-app:k8sV1.0
+    image: tf-spring-boot-app:k8sV1.1
     
   default-response-app:
     container_name: default-response-app

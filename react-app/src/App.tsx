@@ -4,28 +4,13 @@ import Content from './app/components/Content';
 import './App.css';
 
 const newConfiguration: ConfigurationParameters = {
-  basePath: "http://spring-boot-app-service:8080"
+  basePath: "http://172.23.246.168:31000"
 };
 DefaultConfig.config = new Configuration(newConfiguration);
 const greetingsApi = new GreetingsApi();
 
 function App() {
   const [content, setContent] = useState(<></>);
-
-  const dummyFetch = () => {
-    fetch('https://jsonplaceholder.typicode.com/posts/1')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-    fetch('http://spring-boot-app-service:8080/greetings/all')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-    fetch('http://172.23.246.168:31000/greetings/all')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-  };
 
   async function fetchGreetings(): Promise<void> {
     try {
@@ -40,7 +25,6 @@ function App() {
   }, [content]);
 
   useEffect((): void => {
-    dummyFetch();
     fetchGreetings();
   }, []);
 

@@ -12,14 +12,14 @@ services:
     container_name: react-app
     build:
       dockerfile: Dockerfile
-    image: tf-react-app:k8sV1.4
+    image: tf-react-app:k8sV1.6
 
   spring-boot-app:
     container_name: spring-boot-app
     build:
       dockerfile: Dockerfile
       context: ./spring-boot-app
-    image: tf-spring-boot-app:k8sV1.1
+    image: tf-spring-boot-app:k8sV1.2
     
   default-response-app:
     container_name: default-response-app

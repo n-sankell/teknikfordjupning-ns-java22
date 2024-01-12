@@ -2,22 +2,20 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: app.local
+  - host: fina-bila.se
     http:
       paths:
       - path: /fe
         pathType: Prefix
         backend:
-          service:
-            name: react-app-service
-            port:
-              number: 3000
+          serviceName: react-app-service
+          servicePort: 3000
       - path: /be
         pathType: Prefix
         backend:
-          service:
-            name: spring-boot-app-service
-            port:
-              number: 8080
+          serviceName: spring-boot-app-service
+          servicePort: 8080

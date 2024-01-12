@@ -21,7 +21,7 @@ function App() {
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error('Error:', error));
-    fetch('http://172.23.246.168:31000//greetings/all')
+    fetch('http://172.23.246.168:31000/greetings/all')
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error('Error:', error));

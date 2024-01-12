@@ -17,6 +17,10 @@ function App() {
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error('Error:', error));
+    fetch('http://spring-boot-app-service:8080/greetings/all')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
   };
 
   async function fetchGreetings(): Promise<void> {

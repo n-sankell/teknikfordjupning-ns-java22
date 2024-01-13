@@ -1,34 +1,31 @@
 FROM openapitools/openapi-generator:cli-v4.3.0 AS openapi-generator
 
-COPY /spring-boot-app/src/main/resources/openapi.yaml /react-app
+WORKDIR /app
 
-COPY react-app/openapi.yaml /opt/openapi-generator/modules/openapi-generator-cli/target
+COPY ./spring-boot-app/src/main/resources/openapi.yaml /app/react-app/openapi.yaml
 
-RUN [ -d "react-app/src/generated" ] && rm -rf react-app/src/generated || true
-
-WORKDIR '/opt/openapi-generator/modules/openapi-generator-cli/target'
-
-RUN java -jar openapi-generator-cli.jar generate -i openapi.yaml -g typescript-fetch -o .react-app/src/generated --additional-properties redux=true
+RUN mkdir -p /app/react-app/src/generated && \
+    java -jar /opt/openapi-generator/modules/openapi-generator-cli/target/openapi-generator-cli.jar generate -i /app/react-app/openapi.yaml -g typescript-fetch -o /app/react-app/src/generated --additional-properties redux=true
 
 FROM node:20-slim AS builder
 
-WORKDIR '/app'
+WORKDIR '/app/react-app'
 
-COPY react-app/package.json .
+COPY ./react-app/package.json .
 
 RUN yarn
 
-COPY react-app/ ./
+COPY --from=openapi-generator /app/react-app/src/generated /app/react-app/src/generated
+
+COPY ./react-app/ .
 
 RUN yarn build
 
 FROM node:20-slim
 
-RUN apt-get update && apt-get install -y curl
-
 WORKDIR '/app'
 
-COPY --from=builder /app/build ./build
+COPY --from=builder /app/react-app/build /app/build
 
 RUN npm install -g serve
 

@@ -35,3 +35,10 @@ paths:
                 $ref: '#/components/schemas/Greetings'
       tags:
         - Greetings
+
+servers:
+  - url: http://{address}
+    variables:
+      address:
+        default: http://172.23.246.168:32000
+        description: The current environment

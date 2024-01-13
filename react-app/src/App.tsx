@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Configuration, ConfigurationParameters, GreetingsApi, DefaultConfig } from './generated';
+import { GreetingsApi } from './generated';
 import Content from './app/components/Content';
 import './App.css';
 
-const newConfiguration: ConfigurationParameters = {
-  basePath: "http://172.23.246.168:31000"
-};
-DefaultConfig.config = new Configuration(newConfiguration);
 const greetingsApi = new GreetingsApi();
 
 function App() {

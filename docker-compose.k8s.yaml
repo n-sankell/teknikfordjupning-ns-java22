@@ -13,6 +13,8 @@ services:
     build:
       dockerfile: Dockerfile
     image: tf-react-app:k8sV1.6
+    environment:
+      ADDRESS: "http://172.23.246.168:32000"
 
   spring-boot-app:
     container_name: spring-boot-app
@@ -27,3 +29,4 @@ services:
       dockerfile: Dockerfile
       context: ./default-response-app
     image: tf-default-response-app:k8s
+

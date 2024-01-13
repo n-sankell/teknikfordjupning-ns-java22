@@ -1,4 +1,3 @@
-import React from 'react';
 import { Greetings } from '../../generated';
 
 type Props = {

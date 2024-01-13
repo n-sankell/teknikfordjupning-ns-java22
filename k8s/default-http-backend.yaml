@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: default-response-app
-        image: tf-default-response-app:k8s
+        image: tf-default-response-app:v1.0
         imagePullPolicy: Never
         ports:
         - containerPort: 8081

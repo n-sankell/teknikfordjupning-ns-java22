@@ -12,23 +12,25 @@ services:
     container_name: react-app
     build:
       dockerfile: Dockerfile
-    image: tf-react-app:v1.6
-    environment:
-      ADDRESS: "http://172.23.246.168:31000"
+      args:
+        - ADDRESS=172.23.253.92:31000
+    image: tf-react-app:v2.0
 
   spring-boot-app:
     container_name: spring-boot-app
     build:
       dockerfile: Dockerfile
       context: ./spring-boot-app
-    image: tf-spring-boot-app:v1.2
+    image: tf-spring-boot-app:v1.3
     environment: 
-      ALLOWED_ORIGIN: "http://172.23.246.168:32000"
+      ALLOWED_ORIGIN: "http://172.23.253.92:32000"
+    depends_on:
+      - mysql
     
-  default-response-app:
-    container_name: default-response-app
-    build:
-      dockerfile: Dockerfile
-      context: ./default-response-app
-    image: tf-default-response-app:v1.0
+  #default-response-app:
+  #  container_name: default-response-app
+  #  build:
+  #    dockerfile: Dockerfile
+  #    context: ./default-response-app
+  #  image: tf-default-response-app:v1.0
 

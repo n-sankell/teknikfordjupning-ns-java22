@@ -1,29 +1,36 @@
 FROM openapitools/openapi-generator:cli-v4.3.0 AS openapi-generator
 
-WORKDIR /app
+WORKDIR /abc
 
-COPY ./spring-boot-app/src/main/resources/openapi.yaml /app/react-app/openapi.yaml
+COPY ./spring-boot-app/src/main/resources/openapi.yaml ./openapi.yaml
 
-RUN mkdir -p /app/react-app/src/generated && \
-    java -jar /opt/openapi-generator/modules/openapi-generator-cli/target/openapi-generator-cli.jar generate -i /app/react-app/openapi.yaml -g typescript-fetch -o /app/react-app/src/generated --additional-properties redux=true
+ARG ADDRESS=localhost:8080
 
-FROM node:20-slim AS builder
+ENV ADDRESS_B=${ADDRESS}
 
-WORKDIR '/app/react-app'
+RUN java -jar /opt/openapi-generator/modules/openapi-generator-cli/target/openapi-generator-cli.jar generate -i ./openapi.yaml -g typescript-fetch -o  ./generated --additional-properties redux=true --server-variables=address=${ADDRESS}
 
-COPY ./react-app/package.json .
+RUN mkdir -p /abc/generated/confirm-generated-folder
 
-RUN yarn
+FROM node:16-slim AS builder
 
-COPY --from=openapi-generator /app/react-app/src/generated /app/react-app/src/generated
+WORKDIR /app/react-app
 
 COPY ./react-app/ .
 
+RUN rm -rf ./src/generated
+RUN rm -rf ./src/generated
+
+COPY --from=openapi-generator /abc/generated ./src/generated
+
+RUN yarn cache clean --force
+RUN rm -rf node_modules yarn.lock
+RUN yarn install
 RUN yarn build
 
-FROM node:20-slim
+FROM node:16-slim
 
-WORKDIR '/app'
+WORKDIR /app
 
 COPY --from=builder /app/react-app/build /app/build
 

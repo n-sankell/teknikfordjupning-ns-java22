@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: react-app
-        image: tf-react-app:v1.6
+        image: tf-react-app:v2.0
         imagePullPolicy: Never
         ports:
         - containerPort: 3000

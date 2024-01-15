@@ -5,7 +5,6 @@ import generatedapi.GreetingsApi;
 import generatedapi.model.GreetingsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.example.springbootapp.converter.GreetingConverter.convert;
@@ -21,7 +20,6 @@ public class GreetingsApiController implements GreetingsApi {
     }
 
     @Override
-    @CrossOrigin(value = {"http://172.23.246.168:32000", "http://localhost:3000"})
     public ResponseEntity<GreetingsDto> getGreetings() {
         return ResponseEntity.ok(convert(greetingsService.getGreetings()));
     }

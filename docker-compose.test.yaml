@@ -14,11 +14,11 @@ services:
     container_name: react-app
     build:
       dockerfile: Dockerfile
+      args:
+        - ADDRESS=localhost:8080
     image: tf-react-app:test
     ports:
       - "3000:3000"
-      args:
-        -ADDRESS=localhost:8080
 
   spring-boot-app:
     container_name: spring-boot-app

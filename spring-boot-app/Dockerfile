@@ -27,4 +27,6 @@ USER appuser
 
 EXPOSE 8080
 
+ENV ALLOWED_ORIGIN=http://localhost:3000
+
 ENTRYPOINT ["java", "-jar", "api.jar", "-Djava.net.preferIPv4Stack=true"]

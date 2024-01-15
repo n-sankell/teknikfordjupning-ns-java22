@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: tf-spring-boot-app:v1.3
+        image: tf-spring-boot-app:v1.0
         imagePullPolicy: Never
         ports:
         - containerPort: 8080

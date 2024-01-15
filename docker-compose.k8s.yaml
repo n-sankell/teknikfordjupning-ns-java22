@@ -14,14 +14,14 @@ services:
       dockerfile: Dockerfile
       args:
         - ADDRESS=172.23.253.92:31000
-    image: tf-react-app:v2.0
+    image: tf-react-app:v1.0
 
   spring-boot-app:
     container_name: spring-boot-app
     build:
       dockerfile: Dockerfile
       context: ./spring-boot-app
-    image: tf-spring-boot-app:v1.3
+    image: tf-spring-boot-app:v1.1
     environment: 
       ALLOWED_ORIGIN: "http://172.23.253.92:32000"
     depends_on:

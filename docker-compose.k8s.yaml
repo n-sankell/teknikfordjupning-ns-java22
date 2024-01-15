@@ -23,6 +23,4 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./spring-boot-app
-    environment: 
-      ALLOWED_ORIGIN: http://127.0.0.1:55285
-    image: tf-spring-boot-app:v2.3
+    image: tf-spring-boot-app:v2.6

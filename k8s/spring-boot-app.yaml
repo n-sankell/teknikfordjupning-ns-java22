@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: tf-spring-boot-app:v2.3
+        image: tf-spring-boot-app:v2.6
         imagePullPolicy: Never
         ports:
         - containerPort: 8080
@@ -39,7 +39,9 @@ spec:
             configMapKeyRef:
               name: mysql-config
               key: mysql-url
-              
+        - name: ALLOWED_ORIGIN
+          value: http://127.0.0.1:55285
+
 ---
 
 apiVersion: v1

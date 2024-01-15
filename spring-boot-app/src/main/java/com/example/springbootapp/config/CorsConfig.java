@@ -20,13 +20,9 @@ public class CorsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        String allowedOrigin = environment.getProperty("allowed.origin", "");
-        System.out.println("ALLOWED ORIGIN: " + allowedOrigin);
+        String allowedOrigin = environment.getProperty("allowed.origin");
         registry.addMapping("/**")
-            .allowedOrigins(
-                allowedOrigin,
-                "http://127.0.0.1:55285"
-            )
+            .allowedOrigins(allowedOrigin)
             .allowedMethods("GET", "POST", "PUT", "DELETE")
             .maxAge(3600);
     }

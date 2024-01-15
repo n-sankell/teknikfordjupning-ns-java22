@@ -1,4 +1,5 @@
 import { Greetings } from '../../generated';
+import "./Content.css";
 
 type Props = {
     greetings: Greetings;

@@ -1,4 +1,4 @@
-FROM openapitools/openapi-generator:cli-v4.3.0 AS openapi-generator
+FROM openapitools/openapi-generator-cli:v7.2.0 AS openapi-generator
 
 WORKDIR /abc
 
@@ -12,7 +12,7 @@ RUN java -jar /opt/openapi-generator/modules/openapi-generator-cli/target/openap
 
 RUN mkdir -p /abc/generated/confirm-generated-folder
 
-FROM node:16-slim AS builder
+FROM node:20-slim AS builder
 
 WORKDIR /app/react-app
 
@@ -28,7 +28,7 @@ RUN rm -rf node_modules yarn.lock
 RUN yarn install
 RUN yarn build
 
-FROM node:16-slim
+FROM node:20-slim
 
 WORKDIR /app
 

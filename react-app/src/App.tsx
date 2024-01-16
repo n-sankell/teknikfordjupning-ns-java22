@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { GreetingsApi } from './generated';
 import Content from './app/components/Content';
+import Header from './app/components/Header';
 import './App.css';
 
 const greetingsApi = new GreetingsApi();
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <main>
         {content}
       </main>

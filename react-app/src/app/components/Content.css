@@ -1,3 +1,80 @@
-.greeting {
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    width: 90%;
+    height: 70%;
     margin: 10%;
-}
+    background: rgb(134, 160, 169);
+  }
+
+  .heading {
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    color: rgb(250, 250, 250);
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .list-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ul-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: start;
+    text-align: center;
+    list-style-type: none;
+    width: 30%;
+    height: 100%;
+  }
+  
+  .list-item {
+    display: table;
+    margin: 1px auto 1px auto;
+    width: 95%;
+    height: 30%;
+  }
+  
+  .greeting-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 60%;
+    height: 50%;
+    padding: 2%;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin: 1%;
+  }
+  
+  .greeting {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: rgb(182, 38, 230);
+    width: 120%;
+    height: 110%;
+    color: rgb(250, 250, 250);
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .greeting:hover {
+    color: rgb(240, 240, 240);
+    cursor: pointer;
+  }

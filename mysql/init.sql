@@ -18,5 +18,11 @@ WHERE NOT EXISTS (
     SELECT greeting_id FROM greeting WHERE greeting_id = '660e9511-e29b-51d5-a716-546655440001'
 );
 
+CREATE TABLE IF NOT EXISTS food (
+    food_id CHAR(36) PRIMARY KEY,
+    food_name VARCHAR(255) NOT NULL,
+    food_rating DECIMAL(3,1) CHECK (rating >= 1 AND rating <= 10 AND rating % 0.5 = 0)
+);
+
 GRANT ALL PRIVILEGES ON mysql.* TO 'user'@'%';
 FLUSH PRIVILEGES;

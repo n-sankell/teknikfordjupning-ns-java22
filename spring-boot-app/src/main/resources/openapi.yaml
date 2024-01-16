@@ -1,9 +1,10 @@
 openapi: 3.0.3
 info:
-  title: Hello World API
+  title: Food Rating API
   version: 1.0.0
 
 components:
+
   schemas:
     Greeting:
       type: object
@@ -19,7 +20,61 @@ components:
           items:
             $ref: '#/components/schemas/Greeting'
 
+    Food:
+      type: object
+      properties:
+        name:
+          type: string
+        rating:
+          type: number
+          maximum: 10
+          minimum: 1
+
+    Foods:
+      type: object
+      properties:
+        foods:
+          type: array
+          items:
+            $ref: '#/components/schemas/Food'
+
 paths:
+
+  /foods/all:
+    get:
+      summary: Get all foods
+      description: Returns a list of foods.
+      operationId: getFoods
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Foods'
+      tags:
+        - Foods
+
+  /foods/add:
+    post:
+      summary: Add a new food
+      description: Adds a food to the database.
+      operationId: addFood
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Food'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Food'
+      tags:
+        - Foods
 
   /greetings/all:
     get:

@@ -2,11 +2,12 @@ package com.example.springbootapp.repository;
 
 import com.example.springbootapp.model.Greeting;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
 
-@org.springframework.stereotype.Repository
+@Repository
 public class GreetingRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;

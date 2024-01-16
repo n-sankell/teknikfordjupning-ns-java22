@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.example.springbootapp.converter.GreetingConverter.convert;
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 public class GreetingsApiController implements GreetingsApi {
@@ -21,7 +22,7 @@ public class GreetingsApiController implements GreetingsApi {
 
     @Override
     public ResponseEntity<GreetingsDto> getGreetings() {
-        return ResponseEntity.ok(convert(greetingsService.getGreetings()));
+        return ok(convert(greetingsService.getGreetings()));
     }
 
 }

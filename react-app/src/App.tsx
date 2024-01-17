@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react';
-import { GreetingsApi } from './generated';
+import { FoodsApi } from './generated';
 import Content from './app/components/Content';
 import Header from './app/components/Header';
 import './App.css';
 
-const greetingsApi = new GreetingsApi();
+const foodsApi = new FoodsApi();
 
 function App() {
   const [content, setContent] = useState(<></>);
+  const [doFetch, setDoFetch] = useState<boolean>(true);
 
-  async function fetchGreetings(): Promise<void> {
+  async function fetchFoods(): Promise<void> {
     try {
-      const greetings = await greetingsApi.getGreetings();
-      setContent(<Content greetings={greetings} />)
+      const foods = await foodsApi.getFoods();
+      setContent(<Content foods={foods} />)
+      setDoFetch(false);
     } catch (error) {
-      console.error('Error fetching greetings');
+      console.error('Error fetching foods');
     }
   };
   
@@ -22,7 +24,10 @@ function App() {
   }, [content]);
 
   useEffect((): void => {
-    fetchGreetings();
+    if (doFetch === true) {
+      setDoFetch(false);
+      fetchFoods();
+    }
   }, []);
 
   return (

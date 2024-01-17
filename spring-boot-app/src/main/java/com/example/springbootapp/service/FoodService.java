@@ -30,8 +30,27 @@ public class FoodService {
     }
 
     @Transactional
+    public Food editFood(UUID id, FoodDto foodDto) {
+        var food = new Food(
+            id,
+            foodDto.getName(),
+            foodDto.getRating());
+        return foodRepository.editFood(food);
+    }
+
+    @Transactional
+    public void deleteFood(UUID id) {
+        foodRepository.deleteFood(id);
+    }
+
+    @Transactional
     public List<Food> getAllFoods() {
         return foodRepository.getFoods();
+    }
+
+    @Transactional
+    public Food getFoodById(UUID id) {
+        return foodRepository.getFoodById(id);
     }
 
 }

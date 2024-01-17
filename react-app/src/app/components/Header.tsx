@@ -1,6 +1,16 @@
+import { Dispatch, SetStateAction } from "react";
 import "./Header.css";
 
-const Content = () => {
+interface HeaderProps {
+    setUpdate: Dispatch<SetStateAction<boolean>>;
+}
+
+const Content = (headerProps: HeaderProps) => {
+
+    const buttonClick = () => {
+
+    };
+
     return (
     <div className="header">
         <div className='header-button-wrapper'>
@@ -12,7 +22,7 @@ const Content = () => {
                 </label>
             <div id="sidebarMenu">
                 <ul className="sidebarMenuInner">
-                    <li><span className='add-food-button'>Add new food</span></li>
+                    <li><div className="menu-button"><span className="buttonText">Add new food</span></div></li>
                 </ul>
             </div>
         </div>

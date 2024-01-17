@@ -3,43 +3,7 @@ info:
   title: Food Rating API
   version: 1.0.0
 
-components:
-
-  schemas:
-    Greeting:
-      type: object
-      properties:
-        message:
-          type: string
-
-    Greetings:
-      type: object
-      properties:
-        greetings:
-          type: array
-          items:
-            $ref: '#/components/schemas/Greeting'
-
-    Food:
-      type: object
-      properties:
-        name:
-          type: string
-        rating:
-          type: number
-          maximum: 10
-          minimum: 1
-
-    Foods:
-      type: object
-      properties:
-        foods:
-          type: array
-          items:
-            $ref: '#/components/schemas/Food'
-
 paths:
-
   /foods/all:
     get:
       summary: Get all foods
@@ -76,6 +40,78 @@ paths:
       tags:
         - Foods
 
+  /foods/{id}:
+    post:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      summary: Edit a food item
+      description: Edit a food item in the database.
+      operationId: editFood
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Food'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Food'
+      tags:
+        - Foods
+
+    delete:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      summary: Delete a food item
+      description: Deletes a food item from the database.
+      operationId: deleteFood
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      tags:
+        - Foods
+
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      summary: Get a food by id
+      description: Gets a food item from the database by id.
+      operationId: getFood
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Food'
+      tags:
+        - Foods
+
   /greetings/all:
     get:
       summary: Get all messages
@@ -90,6 +126,47 @@ paths:
                 $ref: '#/components/schemas/Greetings'
       tags:
         - Greetings
+
+components:
+  schemas:
+
+    Food:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+          nullable: false
+        rating:
+          type: number
+          maximum: 10
+          minimum: 1
+          nullable: false
+
+    Foods:
+      type: object
+      properties:
+        foods:
+          type: array
+          items:
+            $ref: '#/components/schemas/Food'
+
+    Greeting:
+      type: object
+      properties:
+        message:
+          type: string
+
+    Greetings:
+      type: object
+      properties:
+        greetings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Greeting'
 
 servers:
   - url: http://{address}

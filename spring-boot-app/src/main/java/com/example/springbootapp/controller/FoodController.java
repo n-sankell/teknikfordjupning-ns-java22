@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 import static com.example.springbootapp.converter.FoodConverter.convert;
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -23,8 +25,23 @@ public class FoodController implements FoodsApi {
 
     @Override
     public ResponseEntity<FoodDto> addFood(FoodDto foodDto) {
-        var food = foodService.addFood(foodDto);
-        return ok(convert(food));
+        return ok(convert(foodService.addFood(foodDto)));
+    }
+
+    @Override
+    public ResponseEntity<String> deleteFood(UUID id) {
+        foodService.deleteFood(id);
+        return ok("Food was deleted");
+    }
+
+    @Override
+    public ResponseEntity<FoodDto> editFood(UUID id, FoodDto foodDto) {
+        return ok(convert(foodService.editFood(id, foodDto)));
+    }
+
+    @Override
+    public ResponseEntity<FoodDto> getFood(UUID id) {
+        return ok(convert(foodService.getFoodById(id)));
     }
 
     @Override

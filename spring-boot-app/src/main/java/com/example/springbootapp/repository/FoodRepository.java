@@ -32,7 +32,6 @@ public class FoodRepository {
             .addValue("id", food.id())
             .addValue("name", food.name())
             .addValue("rating", food.rating());
-
         var sql =
             """
             INSERT INTO food (food_id, food_name, food_rating)
@@ -44,7 +43,40 @@ public class FoodRepository {
         if (rows > 0) {
             return getFoodById(food.id());
         }
-        throw new RuntimeException("Something went wrong");
+        throw new RuntimeException("Error, could not add food");
+    }
+
+    public Food editFood(Food food) {
+        var parameters = new MapSqlParameterSource()
+            .addValue("id", food.id())
+            .addValue("name", food.name())
+            .addValue("rating", food.rating());
+        var sql =
+            """
+            UPDATE food SET food_name = :name, food_rating = :rating 
+            WHERE food_id = :id
+            """;
+        var rows = jdbcTemplate.update(sql, parameters);
+
+        if (rows > 0) {
+            return getFoodById(food.id());
+        }
+        throw new RuntimeException("Error, could not update food");
+    }
+
+    public void deleteFood(UUID id) {
+        var parameters = new MapSqlParameterSource()
+            .addValue("id", id);
+        var sql =
+            """
+            DELETE FROM food
+            WHERE food_id = :id
+            """;
+        var rows = jdbcTemplate.update(sql, parameters);
+
+        if (rows < 1) {
+            throw new RuntimeException("Error, could not delete.");
+        }
     }
 
     public Food getFoodById(UUID id) {

@@ -1,20 +1,21 @@
-import { Greetings } from '../../generated';
+import { Foods } from '../../generated';
 import "./Content.css";
 
 type Props = {
-    greetings: Greetings;
+    foods: Foods;
 }
 
 const Content = (props: Props) => {
-    const greetings = props.greetings.greetings === undefined ? [] : props.greetings.greetings;
+    const foods = props.foods.foods === undefined ? [] : props.foods.foods;
     return (
     <div className="content">
         <h1 className='heading'>My favourite foods</h1>
         <div className='list-wrapper'>
-            <ul className='ul-list'> { greetings.map((greeting, index) => (
+            <ul className='ul-list'> { foods.map((food, index) => (
                 <li key={index} className='list-item'>
-                    <div className="greeting-wrapper">
-                        <span className='greeting'>{greeting.message}</span>
+                    <div className="food-wrapper">
+                        <span className='food'>{food.name}</span>
+                        <span className='food-rating'>{food.rating}</span>
                     </div>
                 </li>) ) }
             </ul>

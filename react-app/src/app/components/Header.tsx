@@ -2,7 +2,8 @@ import { Dispatch, SetStateAction } from "react";
 import "./Header.css";
 
 interface HeaderProps {
-    setUpdate: Dispatch<SetStateAction<boolean>>;
+    setShowAddModal: Dispatch<SetStateAction<boolean>>;
+    setShowEditModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const Content = (headerProps: HeaderProps) => {

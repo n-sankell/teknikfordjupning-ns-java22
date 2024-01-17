@@ -6,7 +6,7 @@ interface HeaderProps {
     setShowEditModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const Content = (headerProps: HeaderProps) => {
+const Header = (headerProps: HeaderProps) => {
 
     const buttonClick = () => {
 
@@ -30,4 +30,4 @@ const Content = (headerProps: HeaderProps) => {
     </div>);
 }
 
-export default Content;
+export default Header;

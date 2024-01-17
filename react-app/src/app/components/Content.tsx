@@ -14,8 +14,13 @@ const Content = (props: Props) => {
             <ul className='ul-list'> { foods.map((food, index) => (
                 <li key={index} className='list-item'>
                     <div className="food-wrapper">
-                        <span className='food'>{food.name}</span>
-                        <span className='food-rating'>{food.rating}</span>
+                        <div className='food'>
+                            <span className='food-name'>{food.name}</span>
+                            <div className='food-rating-wrapper'>
+                                <div className='food-rating-text'><span>Rating: </span></div>
+                                <div className='food-rating-value'><span>{food.rating}</span></div>
+                            </div>
+                        </div>
                     </div>
                 </li>) ) }
             </ul>

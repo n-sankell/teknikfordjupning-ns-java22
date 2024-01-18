@@ -5,8 +5,8 @@
   flex-direction: column;
   background: radial-gradient(circle, rgba(228,228,228,1) 17%, rgba(255,255,255,1) 66%);
   position: relative;
-  width: 1200px;
-  height: 1000px;
+  width: 100%;
+  height: 100%;
 }
 
 main {
@@ -14,8 +14,8 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 95%;
-  height: 95%;
+  width: 300%;
+  height: 100%;
 }
 
 .input-name-add {

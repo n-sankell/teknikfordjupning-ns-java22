@@ -3,9 +3,10 @@
     align-items: center;
     justify-content: start;
     flex-direction: column;
-    width: 90%;
-    height: 70%;
+    width: 85%;
+    height: 100%;
     margin: 10%;
+    padding-bottom: 7%;
     background: rgb(134, 160, 169);
   }
 

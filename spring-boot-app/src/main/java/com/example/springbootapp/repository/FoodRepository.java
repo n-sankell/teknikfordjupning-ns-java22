@@ -37,7 +37,6 @@ public class FoodRepository {
             INSERT INTO food (food_id, food_name, food_rating)
             VALUES (:id, :name, :rating);
             """;
-        System.out.println(parameters);
         int rows = jdbcTemplate.update(sql, parameters);
 
         if (rows > 0) {

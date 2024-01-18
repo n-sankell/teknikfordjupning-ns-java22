@@ -26,7 +26,6 @@ public class FoodService {
             UUID.randomUUID(),
             foodDto.getName(),
             foodDto.getRating());
-        System.out.println(foodDto);
         return foodRepository.addFood(food);
     }
 

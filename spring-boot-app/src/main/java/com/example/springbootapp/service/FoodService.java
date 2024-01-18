@@ -26,6 +26,7 @@ public class FoodService {
             UUID.randomUUID(),
             foodDto.getName(),
             foodDto.getRating());
+        System.out.println(foodDto);
         return foodRepository.addFood(food);
     }
 
@@ -39,8 +40,8 @@ public class FoodService {
     }
 
     @Transactional
-    public void deleteFood(UUID id) {
-        foodRepository.deleteFood(id);
+    public String deleteFood(UUID id) {
+        return foodRepository.deleteFood(id);
     }
 
     @Transactional

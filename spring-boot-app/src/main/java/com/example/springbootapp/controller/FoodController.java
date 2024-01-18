@@ -30,8 +30,7 @@ public class FoodController implements FoodsApi {
 
     @Override
     public ResponseEntity<String> deleteFood(UUID id) {
-        foodService.deleteFood(id);
-        return ok("Food was deleted");
+        return ok(foodService.deleteFood(id));
     }
 
     @Override

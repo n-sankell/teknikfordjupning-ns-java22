@@ -31,7 +31,7 @@ function App() {
       setDoFetch(false);
       fetchFoods();
     }
-  }, []);
+  }, [doFetch]);
 
   const addFoodModal = <AddFoodModal setUpdate={setDoFetch} setShowAddModal={setShowAddModal} />
 
@@ -39,8 +39,8 @@ function App() {
     <div className="App">
       <Header setShowAddModal={setShowAddModal} setShowEditModal={setShowEditModal} />
       <main className="main">
-        { showAddModal ? addFoodModal : "" }
         { content }
+        { showAddModal ? addFoodModal : "" }
       </main>
     </div>
   );

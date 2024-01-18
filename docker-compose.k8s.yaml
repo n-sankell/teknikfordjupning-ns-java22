@@ -14,7 +14,7 @@ services:
       dockerfile: Dockerfile
       args:
         - ADDRESS=127.0.0.1:55489
-    image: tf-react-app:v1.2
+    image: tf-react-app:v1.3
 
   spring-boot-app:
     container_name: spring-boot-app

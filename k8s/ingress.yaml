@@ -2,15 +2,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: my-ingress
+  namespace: default
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  tls:
-  - hosts:
-    - fina-bilar.se
-    secretName: secret-tls
+  #tls:
+  #- hosts:
+  #  - min-favorit-mat.se
+  #  secretName: secret-tls
   rules:
-  - host: fina-bilar.se
+  - host: min-favorit-mat.se
     http:
       paths:
       - path: /fe

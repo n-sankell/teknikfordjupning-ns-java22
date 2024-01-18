@@ -87,20 +87,23 @@
     height: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: space-between;
+    justify-content: space-around;
   }
 
   .food-rating-text {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    justify-content: flex-end;
+    margin-left: 10%;
+    align-items: center;
   }
 
   .food-rating-value {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    justify-content: flex-start;
+    margin-right: 10%;
+    align-items: center;
   }
 
   .food:hover {

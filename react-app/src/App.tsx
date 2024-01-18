@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FoodsApi } from './generated';
+import { Foods, FoodsApi } from './generated';
 import Content from './app/components/Content';
 import Header from './app/components/Header';
 import './App.css';
@@ -12,19 +12,26 @@ function App() {
   const [doFetch, setDoFetch] = useState<boolean>(true);
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
+  const [showDeleteBoxes, setShowDeleteBoxes] = useState<boolean>(false);
+  const [foods, setFoods] = useState<Foods>({});
 
   async function fetchFoods(): Promise<void> {
     try {
-      const foods = await foodsApi.getFoods();
-      setContent(<Content foods={foods} />)
+      const foodsResponse = await foodsApi.getFoods();
+      setFoods(foodsResponse);
+      setContent(<Content foods={foodsResponse} showDeleteBox={showDeleteBoxes} setUpdate={setDoFetch}/>)
       setDoFetch(false);
     } catch (error) {
-      console.error('Error fetching foods');
+      console.error('Error fetching foods: ' + error);
     }
   };
   
   useEffect((): void => {
   }, [content]);
+
+  useEffect((): void => {
+    <Content foods={foods} showDeleteBox={showDeleteBoxes} setUpdate={setDoFetch}/>
+  }, [setShowDeleteBoxes]);
 
   useEffect((): void => {
     if (doFetch === true) {
@@ -37,7 +44,9 @@ function App() {
 
   return (
     <div className="App">
-      <Header setShowAddModal={setShowAddModal} setShowEditModal={setShowEditModal} />
+      <Header setShowAddModal={setShowAddModal} setShowEditModal={setShowEditModal} 
+              setShowDeleteBoxes={setShowDeleteBoxes} showDeleteBoxes={showDeleteBoxes}
+              foods={foods} setContent={setContent} setUpdate={setDoFetch}/>
       <main className="main">
         { content }
         { showAddModal ? addFoodModal : "" }

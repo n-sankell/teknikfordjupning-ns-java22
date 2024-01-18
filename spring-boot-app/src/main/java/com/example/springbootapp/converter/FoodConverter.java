@@ -9,7 +9,7 @@ import java.util.List;
 public class FoodConverter {
 
     public static FoodDto convert(Food food) {
-        return new FoodDto().name(food.name()).rating(food.rating());
+        return new FoodDto().id(food.id()).name(food.name()).rating(food.rating());
     }
 
     public static FoodsDto convert(List<Food> foods) {

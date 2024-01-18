@@ -53,6 +53,7 @@ const AddFoodModal = (props: Props) => {
                 placeholder="Type a food name..." 
                 className="input-add"
                 value={foodName}
+                maxLength={20}
                 required={true} 
             />
             <input 
@@ -61,6 +62,7 @@ const AddFoodModal = (props: Props) => {
                 className="input-add"
                 type="number"
                 value={foodRating}
+                min="1" max="10" step="0.5"
                 required={true} 
             />
             <input className="add-button" type="submit" value="Add food" />

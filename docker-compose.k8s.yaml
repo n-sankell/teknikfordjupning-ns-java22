@@ -13,8 +13,8 @@ services:
     build:
       dockerfile: Dockerfile
       args:
-        - ADDRESS=127.0.0.1:55489
-    image: tf-react-app:v1.3
+        - ADDRESS=127.0.0.1:51704
+    image: tf-react-app:v1.5
 
   spring-boot-app:
     container_name: spring-boot-app
@@ -23,4 +23,4 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./spring-boot-app
-    image: tf-spring-boot-app:v2.7
+    image: tf-spring-boot-app:v2.8
